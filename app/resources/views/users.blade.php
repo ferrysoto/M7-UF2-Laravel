@@ -38,7 +38,7 @@
                               {{ $user->is_admin }}
                             </td>
                             <td>
-                              <a href="{{ route('user', Auth::id()) }}">
+                              <a href="{{ route('user', $user->id) }}">
                                 <i class="fas fa-user-cog"></i>
                               </a>
                             </td>

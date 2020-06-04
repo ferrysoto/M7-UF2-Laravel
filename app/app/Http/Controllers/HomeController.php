@@ -39,4 +39,17 @@ class HomeController extends Controller
       return view('user', compact('user'));
     }
 
+    public function userUpdate(Request $request) {
+
+      $user = User::where('id', $request->id)->first();
+
+      User::where('id', $user->id)->update([
+        'name'     => $request['name'],
+        'email'    => $request['email'],
+        'is_admin' => $request['is_admin'],
+      ]);
+
+      return redirect()->route('users');
+    }
+
 }
