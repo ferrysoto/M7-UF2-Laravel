@@ -34,9 +34,13 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                      <a href="{{ route('users') }}" class="navbar-brand">Users Managment</a>
-                    </ul>
+                    @if (Auth::check())
+                      @if (Auth::user()->is_admin == 1)
+                        <ul class="navbar-nav mr-auto">
+                          <a href="{{ route('users') }}" class="navbar-brand">Users Managment</a>
+                        </ul>                        
+                      @endif
+                    @endif
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
