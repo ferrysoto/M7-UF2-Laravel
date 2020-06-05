@@ -28,17 +28,17 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ route('home') }}">
-                    Orders
-                </a>
-                <a href="{{ route('suppliers') }}" class="navbar-brand">Suppliers</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  @if (Auth::check())
                     <!-- Left Side Of Navbar -->
-                    @if (Auth::check())
+                    <a class="navbar-brand" href="{{ route('home') }}">
+                      Orders
+                    </a>
+                    <a href="{{ route('suppliers') }}" class="navbar-brand">Suppliers</a>
                       @if (Auth::user()->is_admin == 1)
                         <ul class="navbar-nav mr-auto">
                           <a href="{{ route('users') }}" class="navbar-brand">Users Managment</a>

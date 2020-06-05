@@ -20,6 +20,7 @@ class SuppliersTable extends Migration
           $table->string('address', 255);
           $table->string('phone', 14);
           $table->string('cif', 14);
+          $table->boolean('active')->default(true);
           $table->timestamps();
       });
     }

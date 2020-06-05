@@ -11,7 +11,7 @@ class SuppliersController extends Controller
     public function index()
     {
         $suppliers = Supplier::get();
-        // dd($suppliers);
+
         return view('suppliers', compact('suppliers'));
     }
 
@@ -44,7 +44,9 @@ class SuppliersController extends Controller
      */
     public function show($id)
     {
-        //
+        $supplier = Supplier::where('id', $id)->first();
+
+        return view('supplier', compact('supplier'));
     }
 
     /**
@@ -53,9 +55,17 @@ class SuppliersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function updateState($id)
     {
-        //
+      $supplier = Supplier::where('id', $id)->first();
+
+      if ($supplier->active == 1) {
+        Supplier::where('id', $id)->update(['active' => 0]);
+      } else {
+        Supplier::where('id', $id)->update(['active' => 1]);
+      }
+
+      return redirect()->route('suppliers');
     }
 
     /**
@@ -65,9 +75,21 @@ class SuppliersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+      $update = Supplier::where('id', $request->id)->update([
+        'name' => $request['name'],
+        'email' => $request['email'],
+        'address' => $request['address'],
+        'phone' => $request['phone'],
+        'cif' => $request['cif'],
+        'active' => $request['active'],
+
+      ]);
+
+        if ($update) {
+          return redirect()->route('suppliers');
+        }
     }
 
     /**

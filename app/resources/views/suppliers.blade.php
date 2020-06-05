@@ -7,6 +7,7 @@
             <div class="card">
                 <div class="card-header">Suppliers Management</div>
                 <div class="card-body">
+                  
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -19,6 +20,7 @@
                           <th scope="col">Name</th>
                           <th scope="col">Email</th>
                           <th scope="col">CIF</th>
+                          <th scope="col">Active</th>
                           <th scope="col">Actions</th>
                         </tr>
                       </thead>
@@ -38,19 +40,23 @@
                               {{ $supplier->cif }}
                             </td>
                             <td>
-                              <a href="{{ route('user', $supplier->id) }}">
+                              @if ( $supplier->active == 1)
+                                <i class="fas fa-check" style="color: green;"></i>
+                              @else
+                                <i class="fas fa-times" style="color: red;"></i>
+                              @endif
+                            </td>
+                            <td>
+                              <a href="{{ route('supplier', $supplier->id) }}">
                                 <i class="fas fa-store"></i>
                               </a>
-                              <a href="" id="remove-user">
-                                <i class="fas fa-ban"></i>
+                              <a href="{{ route('supplier.state', $supplier->id) }}">
+                                @if ($supplier->active == 1)
+                                  <i class="fas fa-toggle-on"></i>
+                                @else
+                                  <i class="fas fa-toggle-off"></i>
+                                @endif
                               </a>
-                              @section('scripts')
-                                <script type="text/javascript">
-                                  $('#remove-user').click(function() {
-                                    alert("¿Estás seguro que deseas eliminar este usuario?");
-                                  });
-                                </script>
-                              @endsection
                             </td>
                           </tr>
                         @endforeach
