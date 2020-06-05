@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Users Management</div>
+                <div class="card-header">Suppliers Management</div>
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -18,36 +18,39 @@
                           <th scope="col">#</th>
                           <th scope="col">Name</th>
                           <th scope="col">Email</th>
-                          <th scope="col">Admin</th>
+                          <th scope="col">CIF</th>
                           <th scope="col">Actions</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($suppliers as $supplier)
                           <tr>
                             <td>
-                              {{ $user->id }}
+                              {{ $supplier->id }}
                             </td>
                             <td>
-                              {{ $user->name }}
+                              {{ $supplier->name }}
                             </td>
                             <td>
-                              {{ $user->email }}
+                              {{ $supplier->email }}
                             </td>
                             <td>
-                              @if ($user->is_admin == 1)
-                                <i class="fas fa-check" style="color: green;"></i>
-                              @else
-                                <i class="fas fa-times" style="color: red;"></i>
-                              @endif
+                              {{ $supplier->cif }}
                             </td>
                             <td>
-                              <a href="{{ route('user', $user->id) }}">
-                                <i class="fas fa-user-cog"></i>
+                              <a href="{{ route('user', $supplier->id) }}">
+                                <i class="fas fa-store"></i>
                               </a>
-                              <a href="{{ route('user.remove', $user->id) }}">
-                                <i class="fas fa-trash-alt"></i>
+                              <a href="" id="remove-user">
+                                <i class="fas fa-ban"></i>
                               </a>
+                              @section('scripts')
+                                <script type="text/javascript">
+                                  $('#remove-user').click(function() {
+                                    alert("¿Estás seguro que deseas eliminar este usuario?");
+                                  });
+                                </script>
+                              @endsection
                             </td>
                           </tr>
                         @endforeach

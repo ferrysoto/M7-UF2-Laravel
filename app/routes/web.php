@@ -19,7 +19,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//  Users Management
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/users', 'HomeController@users')->name('users');
+Route::get('/users', 'HomeController@users')->middleware('auth')->name('users');
 Route::get('/user/{id}', 'HomeController@user')->name('user');
 Route::post('/user/{id}', 'HomeController@userUpdate')->name('user.update');
+Route::get('/user/remove/{id}', 'HomeController@userRemove')->name('user.remove');
+
+
+//  Suppliers
+Route::get('/suppliers', 'SuppliersController@index')->name('suppliers');

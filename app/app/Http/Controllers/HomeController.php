@@ -52,4 +52,10 @@ class HomeController extends Controller
       return redirect()->route('users');
     }
 
+    public function userRemove($id) {
+      if (User::where('id', $id)->delete()) {
+        return back()->with('message', 'Delete success');
+      }
+    }
+
 }
