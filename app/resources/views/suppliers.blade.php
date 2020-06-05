@@ -5,9 +5,18 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Suppliers Management</div>
+                <div class="card-header">
+                    <div class="float-left">
+                      Suppliers Management
+                    </div>
+                    <div class="float-right">
+                      <a data-toggle="modal" data-target="#createSupplierModal">
+                        <i class="far fa-plus-square"></i>
+                      </a>
+                    </div>
+                   @include('createSuppliersModal');  
+                </div>
                 <div class="card-body">
-                  
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
