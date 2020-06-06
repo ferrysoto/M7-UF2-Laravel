@@ -19,7 +19,9 @@
             <label for="id_supplier">Proveedor</label>
             <select name="id_supplier" class="form-control">
               @foreach ($suppliers as $supplier)
-                <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                @if ($supplier->active == 1)
+                  <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>                  
+                @endif
               @endforeach
             </select>
           </div>

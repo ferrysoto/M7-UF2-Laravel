@@ -15,7 +15,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-      $products = Product::get();
+      $products = Product::paginate(5);
       $suppliers = Supplier::get();
 
       return view('products', compact('products', 'suppliers'));
@@ -57,8 +57,9 @@ class ProductsController extends Controller
     public function show($id)
     {
       $product = Product::where('id', $id)->first();
+      $suppliers = Supplier::get();
 
-      return view('product', compact('product'));
+      return view('product', compact('product', 'suppliers'));
     }
 
     /**
@@ -79,9 +80,32 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+      $update = Product::where('id', $request->id)->update([
+        'name' => $request['name'],
+        'price' => $request['price'],
+        'id_supplier' => $request['id_supplier'],
+        'active' => $request['active'],
+
+      ]);
+
+        if ($update) {
+          return redirect()->route('products');
+        }
+    }
+
+    public function updateState($id)
+    {
+      $product = Product::where('id', $id)->first();
+
+      if ($product->active == 1) {
+        Product::where('id', $id)->update(['active' => 0]);
+      } else {
+        Product::where('id', $id)->update(['active' => 1]);
+      }
+
+      return redirect()->route('products');
     }
 
     /**
@@ -92,6 +116,8 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+      if (Product::where('id', $id)->delete()) {
+        return back()->with('message', 'Delete success');
+      }
     }
 }

@@ -14,7 +14,7 @@
                         <i class="far fa-plus-square"></i>
                       </a>
                     </div>
-                   @include('createProductModal');
+                   @include('createProductModal')
                 </div>
                 <div class="card-body">
                     @if (session('status'))
@@ -43,7 +43,7 @@
                               {{ $product->name }}
                             </td>
                             <td>
-                              {{ $product->price }}
+                              {{ $product->price }} €
                             </td>
                             <td>
                               @foreach ($suppliers as $supplier)
@@ -61,7 +61,7 @@
                             </td>
                             <td>
                               <a href="{{ route('product', $product->id) }}">
-                                <i class="fas fa-store"></i>
+                                <i class="fas fa-info-circle"></i>
                               </a>
                               <a href="{{ route('product.state', $product->id) }}">
                                 @if ($product->active == 1)
@@ -70,12 +70,18 @@
                                   <i class="fas fa-toggle-off"></i>
                                 @endif
                               </a>
+                              <a href="{{ route('product.remove', $product->id) }}">
+                                <i class="fas fa-trash-alt"></i>
+                              </a>
                             </td>
                           </tr>
                         @endforeach
                       </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="float-right mt-2">
+              {{ $products->links() }}
             </div>
         </div>
     </div>

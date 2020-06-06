@@ -14,7 +14,7 @@
                         <i class="far fa-plus-square"></i>
                       </a>
                     </div>
-                   @include('createSuppliersModal');
+                   @include('createSuppliersModal')
                 </div>
                 <div class="card-body">
                     @if (session('status'))

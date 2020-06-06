@@ -38,5 +38,6 @@ Route::get('/supplier/state/{id}', 'SuppliersController@updateState')->name('sup
 Route::get('/products', 'ProductsController@index')->name('products');
 Route::get('/product/{id}', 'ProductsController@show')->name('product');
 Route::post('/product/create', 'ProductsController@create')->name('product.create');
-
+Route::post('/product/{id}', 'ProductsController@update')->name('product.update');
 Route::get('/product/state/{id}', 'ProductsController@updateState')->name('product.state');
+Route::get('/product/remove/{id}', 'ProductsController@destroy')->name('product.remove');
