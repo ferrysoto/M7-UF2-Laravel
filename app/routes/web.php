@@ -33,3 +33,10 @@ Route::get('/supplier/{id}', 'SuppliersController@show')->name('supplier');
 Route::post('/supplier/create', 'SuppliersController@create')->name('supplier.create');
 Route::post('/supplier/{id}', 'SuppliersController@update')->name('supplier.update');
 Route::get('/supplier/state/{id}', 'SuppliersController@updateState')->name('supplier.state');
+
+// Products
+Route::get('/products', 'ProductsController@index')->name('products');
+Route::get('/product/{id}', 'ProductsController@show')->name('product');
+Route::post('/product/create', 'ProductsController@create')->name('product.create');
+
+Route::get('/product/state/{id}', 'ProductsController@updateState')->name('product.state');

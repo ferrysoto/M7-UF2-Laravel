@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                  Users Management
+                  Administrar Usuarios
                 </div>
                 <div class="card-body">
                     @if (session('status'))
@@ -18,10 +18,10 @@
                       <thead>
                         <tr>
                           <th scope="col">#</th>
-                          <th scope="col">Name</th>
+                          <th scope="col">Nombre</th>
                           <th scope="col">Email</th>
                           <th scope="col">Admin</th>
-                          <th scope="col">Actions</th>
+                          <th scope="col">Opciones</th>
                         </tr>
                       </thead>
                       <tbody>

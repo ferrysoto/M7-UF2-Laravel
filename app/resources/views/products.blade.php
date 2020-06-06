@@ -7,14 +7,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="float-left">
-                      Administrar proveedores
+                      Administrar productos
                     </div>
                     <div class="float-right">
-                      <a data-toggle="modal" data-target="#createSupplierModal">
+                      <a data-toggle="modal" data-target="#createProductsModal">
                         <i class="far fa-plus-square"></i>
                       </a>
                     </div>
-                   @include('createSuppliersModal');
+                   @include('createProductModal');
                 </div>
                 <div class="card-body">
                     @if (session('status'))
@@ -27,40 +27,44 @@
                         <tr>
                           <th scope="col">#</th>
                           <th scope="col">Nombre</th>
-                          <th scope="col">Email</th>
-                          <th scope="col">CIF</th>
+                          <th scope="col">Precio</th>
+                          <th scope="col">Proveedor</th>
                           <th scope="col">Activo</th>
                           <th scope="col">Opciones</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($suppliers as $supplier)
+                        @foreach ($products as $product)
                           <tr>
                             <td>
-                              {{ $supplier->id }}
+                              {{ $product->id }}
                             </td>
                             <td>
-                              {{ $supplier->name }}
+                              {{ $product->name }}
                             </td>
                             <td>
-                              {{ $supplier->email }}
+                              {{ $product->price }}
                             </td>
                             <td>
-                              {{ $supplier->cif }}
+                              @foreach ($suppliers as $supplier)
+                                @if ($product->id_supplier == $supplier->id)
+                                  {{ $supplier->name }}
+                                @endif
+                              @endforeach
                             </td>
                             <td>
-                              @if ( $supplier->active == 1)
+                              @if ( $product->active == 1)
                                 <i class="fas fa-check" style="color: green;"></i>
                               @else
                                 <i class="fas fa-times" style="color: red;"></i>
                               @endif
                             </td>
                             <td>
-                              <a href="{{ route('supplier', $supplier->id) }}">
+                              <a href="{{ route('product', $product->id) }}">
                                 <i class="fas fa-store"></i>
                               </a>
-                              <a href="{{ route('supplier.state', $supplier->id) }}">
-                                @if ($supplier->active == 1)
+                              <a href="{{ route('product.state', $product->id) }}">
+                                @if ($product->active == 1)
                                   <i class="fas fa-toggle-on"></i>
                                 @else
                                   <i class="fas fa-toggle-off"></i>

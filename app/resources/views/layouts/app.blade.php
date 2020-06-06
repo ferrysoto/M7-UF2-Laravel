@@ -35,18 +35,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   @if (Auth::check())
                     <!-- Left Side Of Navbar -->
-                    <a class="navbar-brand" href="{{ route('home') }}">
-                      Orders
-                    </a>
+                    <a class="navbar-brand" href="{{ route('home') }}">Orders</a>
                     <a href="{{ route('suppliers') }}" class="navbar-brand">Suppliers</a>
+                    <a href="{{ route('products') }}" class="navbar-brand">Products</a>
                       @if (Auth::user()->is_admin == 1)
                         <ul class="navbar-nav mr-auto">
                           <a href="{{ route('users') }}" class="navbar-brand">Users Managment</a>
                         </ul>
                       @endif
                     @endif
-                    <ul class="navbar-nav mr-auto">
-                    </ul>
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

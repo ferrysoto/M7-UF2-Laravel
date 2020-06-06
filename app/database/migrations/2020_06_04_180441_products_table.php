@@ -18,6 +18,7 @@ class ProductsTable extends Migration
           $table->string('name');
           $table->double('price', 8, 2);
           $table->unsignedBigInteger('id_supplier');
+          $table->boolean('active')->default(true);
           $table->timestamps();
 
           $table->foreign('id_supplier')->references('id')->on('suppliers');
