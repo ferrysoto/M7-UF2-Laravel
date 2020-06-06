@@ -7,58 +7,39 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form method="post" action="{{ route('supplier.create') }}">
       <div class="modal-body">
-        <form method="post" action="{{ route('supplier.create') }}">
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="inputEmail4">Email</label>
-              <input type="email" class="form-control" id="inputEmail4">
+              <label for="name">Razón social</label>
+              <input type="text" class="form-control" name="name" placeholder="Supplier name" maxlength="255" required>
             </div>
             <div class="form-group col-md-6">
-              <label for="inputPassword4">Password</label>
-              <input type="password" class="form-control" id="inputPassword4">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" mame="email" placeholder="name@supplier.com" maxlength="255" required>
             </div>
           </div>
           <div class="form-group">
-            <label for="inputAddress">Address</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-          </div>
-          <div class="form-group">
-            <label for="inputAddress2">Address 2</label>
-            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+            <label for="address">Dirección completa</label>
+            <input type="text" class="form-control" name="address" placeholder="Calle ejemplo, 123, 08980 Barcelona" maxlength="255" required>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="inputCity">City</label>
-              <input type="text" class="form-control" id="inputCity">
+              <label for="phone">Teléfono</label>
+              <input type="tel" class="form-control" name="phone" placeholder="93 666 66 66" required>
             </div>
-            <div class="form-group col-md-4">
-              <label for="inputState">State</label>
-              <select id="inputState" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
-              </select>
-            </div>
-            <div class="form-group col-md-2">
-              <label for="inputZip">Zip</label>
-              <input type="text" class="form-control" id="inputZip">
+            <div class="form-group col-md-6">
+              <label for="cif">CIF</label>
+              <input type="text" class="form-control" name="cif" maxlength="14" placeholder="A99999999" required>
             </div>
           </div>
-          <div class="form-group">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="gridCheck">
-              <label class="form-check-label" for="gridCheck">
-                Check me out
-              </label>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">Sign in</button>
-        </form>
+          <input type="text" name="active" value="1" hidden>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Añadir proveedor</button>
       </div>
+    </form>
     </div>
   </div>
 </div>

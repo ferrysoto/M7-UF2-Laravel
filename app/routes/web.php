@@ -30,6 +30,6 @@ Route::get('/user/remove/{id}', 'HomeController@userRemove')->name('user.remove'
 //  Suppliers
 Route::get('/suppliers', 'SuppliersController@index')->name('suppliers');
 Route::get('/supplier/{id}', 'SuppliersController@show')->name('supplier');
+Route::post('/supplier/create', 'SuppliersController@create')->name('supplier.create');
 Route::post('/supplier/{id}', 'SuppliersController@update')->name('supplier.update');
 Route::get('/supplier/state/{id}', 'SuppliersController@updateState')->name('supplier.state');
-Route::post('/supplier/create', 'SuppliersController@store')->name('supplier.create');
