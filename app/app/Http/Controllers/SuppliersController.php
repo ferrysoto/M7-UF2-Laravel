@@ -20,10 +20,21 @@ class SuppliersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         $inputs = request()->all();
-        dd($inputs, $request);
+        $validateEmail = Supplier::where('email', $inputs['email'])->first();
+
+        if (empty($validateEmail)) {
+          $create = Supplier::create($inputs);
+          if ($create) {
+            return redirect()->route('suppliers');
+          }
+        } else {
+          $name = 'proveedor';
+          return view('validate', compact('name'));
+        }
+
     }
 
     /**

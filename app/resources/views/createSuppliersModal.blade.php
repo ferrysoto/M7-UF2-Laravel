@@ -1,5 +1,5 @@
 <div class="modal fade" id="createSupplierModal" tabindex="-1" role="dialog" aria-labelledby="createSupplierLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="createSupplierLabel">Crear proveedor</h5>
@@ -8,6 +8,7 @@
         </button>
       </div>
       <form method="post" action="{{ route('supplier.create') }}">
+        @csrf
       <div class="modal-body">
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -16,7 +17,7 @@
             </div>
             <div class="form-group col-md-6">
               <label for="email">Email</label>
-              <input type="email" class="form-control" mame="email" placeholder="name@supplier.com" maxlength="255" required>
+              <input type="email" class="form-control" name="email" placeholder="name@supplier.com" maxlength="255" required>
             </div>
           </div>
           <div class="form-group">
