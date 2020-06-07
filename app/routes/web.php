@@ -20,7 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 //  Users Management
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/users', 'HomeController@users')->middleware('auth')->name('users');
 Route::get('/user/{id}', 'HomeController@user')->name('user');
 Route::post('/user/{id}', 'HomeController@userUpdate')->name('user.update');
@@ -43,3 +42,6 @@ Route::get('/product/state/{id}', 'ProductsController@updateState')->name('produ
 Route::get('/product/remove/{id}', 'ProductsController@destroy')->name('product.remove');
 
 // Cart Products
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/order/create', 'OrdersController@index')->name('order.create');
+Route::get('/order/{id}', 'OrdersController@show')->name('order');
