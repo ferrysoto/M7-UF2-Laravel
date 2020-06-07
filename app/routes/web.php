@@ -41,3 +41,5 @@ Route::post('/product/create', 'ProductsController@create')->name('product.creat
 Route::post('/product/{id}', 'ProductsController@update')->name('product.update');
 Route::get('/product/state/{id}', 'ProductsController@updateState')->name('product.state');
 Route::get('/product/remove/{id}', 'ProductsController@destroy')->name('product.remove');
+
+// Cart Products

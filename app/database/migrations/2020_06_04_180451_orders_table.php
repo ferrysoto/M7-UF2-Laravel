@@ -15,12 +15,15 @@ class OrdersTable extends Migration
     {
       Schema::create('orders', function (Blueprint $table) {
           $table->id();
+          $table->string('order_name');
           $table->unsignedBigInteger('user_id');
+          $table->unsignedBigInteger('shipping_id');
           $table->double('total', 8, 2);
           $table->string('comments', 255);
           $table->timestamps();
 
           $table->foreign('user_id')->references('id')->on('users');
+          $table->foreign('shipping_id')->references('id')->on('shipping');
         });
     }
 
