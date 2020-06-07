@@ -31,7 +31,6 @@ class OrdersController extends Controller
      */
     public function create(Request $request)
     {
-      $user = Auth::id();
       $cart = session()->get('cart');
 
       foreach ($cart as $product) {
@@ -40,12 +39,12 @@ class OrdersController extends Controller
           'unit_price' => $product['price'],
           'quantity'   => $product['quantity']
         ]);
-
-        Order::create([
-          'user_id' => $user,
-          'total'   => $request['total']
-        ]);
       }
+
+      Order::create([
+        'user_id' => Auth::id(),
+        'total'   => $request['total']
+      ]);
 
       $request->session()->forget('cart');
       return redirect()->route('home');
@@ -108,7 +107,7 @@ class OrdersController extends Controller
       }
 
       if (isset($cart[$id])) {
-        $cart[$id]['quantity']++;
+        $cart[$id]['quantity'] = $cart[$id]['quantity'] + $request->quantity;
         session()->put('cart', $cart);
 
         return redirect()->back();
