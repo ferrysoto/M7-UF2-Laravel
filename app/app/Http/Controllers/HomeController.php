@@ -26,8 +26,9 @@ class HomeController extends Controller
     public function index()
     {
       $orders = Order::paginate(10);
+      $users = User::get();
 
-      return view('orders', compact('orders'));
+      return view('orders', compact('orders', 'users'));
     }
 
     public function users() {

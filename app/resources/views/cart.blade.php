@@ -7,6 +7,16 @@
             <div class="card">
                 <div class="card-header">
                   Crear pedido
+                  <div class="float-right">
+                    <form action="{{ route('order.create.success') }}" method="post">
+                      @csrf
+                      <input type="number" name="total" value="{{ $total }}" hidden>
+                      <button class="btn btn-success" type="submit">
+                        <i class="far fa-plus-square"></i>
+                        Pagar y formalizar pedido
+                      </button>
+                    </form>
+                  </div>
                 </div>
                 <div class="card-body">
                   <div class="jumbotron-fluid">
@@ -23,13 +33,7 @@
                           <th>Cantidad</th>
                          </tr>
                         </thead>
-                        @php
-                          $total = 0;
-                        @endphp
                         @foreach(session('cart') as $id)
-                          @php
-                            $total += $id['price'] * $id['quantity'];
-                          @endphp
                           <tr>
                             <th>{{ $id['name'] }}</th>
                             <th>{{ $id['price'] }}€</th>

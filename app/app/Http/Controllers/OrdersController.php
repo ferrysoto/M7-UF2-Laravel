@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use App\OrderDetail;
 use App\Product;
-use App\Shipping;
 use App\User;
+use Auth;
+
 
 class OrdersController extends Controller
 {
@@ -18,9 +20,8 @@ class OrdersController extends Controller
     public function index()
     {
       $products = Product::get();
-      $shipping = Shipping::get();
 
-        return view('createOrder', compact('products', 'shipping'));
+      return view('createOrder', compact('products'));
     }
 
     /**
@@ -28,9 +29,26 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+      $user = Auth::id();
+      $cart = session()->get('cart');
+
+      foreach ($cart as $product) {
+        OrderDetail::create([
+          'id_product' => $product['id_product'],
+          'unit_price' => $product['price'],
+          'quantity'   => $product['quantity']
+        ]);
+
+        Order::create([
+          'user_id' => $user,
+          'total'   => $request['total']
+        ]);
+      }
+
+      $request->session()->forget('cart');
+      return redirect()->route('home');
     }
 
     /**
@@ -57,8 +75,17 @@ class OrdersController extends Controller
 
     public function cart() {
       $cart = session()->get('cart');
+      $total = 0;
 
-      return view('cart', compact('cart'));
+      if (empty($cart)) {
+        return view('cart-error');
+      }
+
+      foreach ($cart as $product) {
+        $total += $product['price'] * $product['quantity'];
+      }
+
+      return view('cart', compact('cart', 'total'));
     }
 
     public function addCart(Request $request, $id) {
@@ -68,6 +95,7 @@ class OrdersController extends Controller
       if (!$cart) {
         $cart = [
           $id => [
+            'id_product'  => $id,
             'name'        => $product->name,
             'price'       => $product->price,
             'quantity'    => $request->quantity
@@ -87,9 +115,10 @@ class OrdersController extends Controller
       }
 
       $cart[$id] = [
-          "name"     => $product->name,
-          "price"    => $product->price,
-          "quantity" => $request->quantity
+          'id_product'  => $id,
+          'name'     => $product->name,
+          'price'    => $product->price,
+          'quantity' => $request->quantity
         ];
         session()->put('cart', $cart);
 

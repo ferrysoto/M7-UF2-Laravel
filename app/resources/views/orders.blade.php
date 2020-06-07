@@ -18,7 +18,7 @@
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
+                        <th scope="col">Nombre de socio</th>
                         <th scope="col">Total pedido</th>
                         <th scope="col">Opciones</th>
                       </tr>
@@ -30,7 +30,11 @@
                             {{ $order->id }}
                           </td>
                           <td>
-                            {{ $order->order_name }}
+                            @foreach ($users as $user)
+                              @if ($user->id == $order->user_id)
+                                {{ $user->name }}
+                              @endif
+                            @endforeach
                           </td>
                           <td>
                             {{ $order->total }} €
