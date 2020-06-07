@@ -52,7 +52,48 @@ class OrdersController extends Controller
      */
     public function show($id)
     {
-        
+
+    }
+
+    public function cart() {
+      $cart = session()->get('cart');
+
+      return view('cart', compact('cart'));
+    }
+
+    public function addCart(Request $request, $id) {
+      $product = Product::find($id);
+      $cart = session()->get('cart');
+
+      if (!$cart) {
+        $cart = [
+          $id => [
+            'name'        => $product->name,
+            'price'       => $product->price,
+            'quantity'    => $request->quantity
+          ]
+        ];
+
+        session()->put('cart', $cart);
+
+        return redirect()->back();
+      }
+
+      if (isset($cart[$id])) {
+        $cart[$id]['quantity']++;
+        session()->put('cart', $cart);
+
+        return redirect()->back();
+      }
+
+      $cart[$id] = [
+          "name"     => $product->name,
+          "price"    => $product->price,
+          "quantity" => $request->quantity
+        ];
+        session()->put('cart', $cart);
+
+        return redirect()->back();
     }
 
     /**

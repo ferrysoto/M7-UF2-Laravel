@@ -45,3 +45,5 @@ Route::get('/product/remove/{id}', 'ProductsController@destroy')->name('product.
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/order/create', 'OrdersController@index')->name('order.create');
 Route::get('/order/{id}', 'OrdersController@show')->name('order');
+Route::get('/cart', 'OrdersController@cart')->name('cart');
+Route::get('/add-cart/{id}', 'OrdersController@addCart')->name('add.product');

@@ -9,7 +9,7 @@
                   Pedidos
                   <div class="float-right">
                     <a href="{{ route('order.create') }}">
-                      <i class="far fa-plus-square"></i>
+                      <i class="far fa-plus-square"></i> Nuevo pedido
                     </a>
                   </div>
                 </div>
