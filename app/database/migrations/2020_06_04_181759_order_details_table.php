@@ -16,11 +16,13 @@ class OrderDetailsTable extends Migration
       Schema::create('order_details', function (Blueprint $table) {
           $table->id();
           $table->unsignedBigInteger('id_product');
+          $table->unsignedBigInteger('id_order');
           $table->double('unit_price', 8, 2);
           $table->integer('quantity');
           $table->timestamps();
 
           $table->foreign('id_product')->references('id')->on('products');
+          $table->foreign('id_order')->references('id')->on('orders');
         });
     }
 

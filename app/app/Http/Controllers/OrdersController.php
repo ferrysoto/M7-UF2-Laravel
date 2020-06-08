@@ -33,18 +33,19 @@ class OrdersController extends Controller
     {
       $cart = session()->get('cart');
 
+      $order = Order::create([
+        'user_id' => Auth::id(),
+        'total'   => $request['total']
+      ]);
+
       foreach ($cart as $product) {
         OrderDetail::create([
           'id_product' => $product['id_product'],
+          'id_order' => $order['id'],
           'unit_price' => $product['price'],
           'quantity'   => $product['quantity']
         ]);
       }
-
-      Order::create([
-        'user_id' => Auth::id(),
-        'total'   => $request['total']
-      ]);
 
       $request->session()->forget('cart');
       return redirect()->route('home');
@@ -69,7 +70,17 @@ class OrdersController extends Controller
      */
     public function show($id)
     {
+      $order = Order::where('id', $id)->first();
+      $details = OrderDetail::where('id_order', $id)->get();
+      $products = [];
 
+      foreach ($details as $d) {
+        $product = Product::where('id', $d->id_product)->first();
+        $product->quantity = $d->quantity;
+        array_push($products, $product);
+      }
+
+      return view('order', compact('order', 'products'));
     }
 
     public function cart() {
